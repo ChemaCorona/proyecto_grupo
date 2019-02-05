@@ -3,18 +3,17 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use PDF;
-use App\UserDetail;
+use App\User;
 
 class UserDetailController extends Controller
 {
 
     public function store(Request $request){
 
-      $user = new UserDetail([
-        'full_name' => $request->get('full_name'),
-        'street_address' => $request->get('street_address'),
-        'city' => $request->get('city'),
-        'zip_code' => $request->get('zip_code')
+      $user = new User([
+        'id' => $request->get('id'),
+        'password' => $request->get('password'),
+        'email' => $request->get('email')
       ]);
 
       $user->save();
@@ -22,13 +21,13 @@ class UserDetailController extends Controller
     }
     public function index(){
 
-      $users = UserDetail::all();
+      $users = User::all();
 
       return view('index', compact('users'));
     }
 
     public function downloadPDF($id){
-      $user = UserDetail::find($id);
+      $user = User::find($id);
 
       $pdf = PDF::loadView('pdf', compact('user'));
       return $pdf->download('invoice.pdf');
