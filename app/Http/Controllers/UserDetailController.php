@@ -11,7 +11,7 @@ class UserDetailController extends Controller
     public function store(Request $request){
 
       $user = new User([
-        'id' => $request->get('id'),
+        'name' => $request->get('name'),
         'password' => $request->get('password'),
         'email' => $request->get('email')
       ]);
