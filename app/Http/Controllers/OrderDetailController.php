@@ -8,30 +8,34 @@ use App\Order;
 class OrderDetailController extends Controller
 {
 
-    public function store(Request $request){
-
-      $order = new Order([
-        'id' => $request->get('id'),
-        'id_user' => $request->get('id_user'),
-        'totalprice' => $request->get('totalprice'),
-        'date' => $request->get('date')
-      ]);
-
-      $order->save();
-      return redirect('/index');
-    }
-    public function index(){
-
-      $order = Order::all();
-
-      return view('index', compact('order'));
+  public $order;
+ 
+    /**
+     * [__construct description]
+     * @param Order $id [description]
+     */
+    public function __construct(Order $id)
+    {
+        $this->id = $id;
     }
 
-    public function downloadPDF($id){
-      $order = Order::find($id);
+    public function index()
+    {
+        //get order
+        $orders = $this->id->get();
+ 
+        return view('orders.index', ['orders' => $order]);
+    }
 
-      $pdf = PDF::loadView('pdf', compact('order'));
-      return $pdf->download('invoice.pdf');
-
+    public function viewPDF()
+    {
+        //get all users
+        $o = $this->id->get();
+ 
+        // load view for pdf
+        $pdf = PDF::loadView('pdf.orders', ['orders' => $order]);
+ 
+        // stream pdf on browser
+        return $pdf->stream();
     }
 }

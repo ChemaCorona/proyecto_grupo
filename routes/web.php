@@ -24,8 +24,17 @@ Route::get('/', function () {
     return view('form');
 });
 
-Route::post('submitForm','UserDetailController@store');
+Route::post('submitForm','OrderDetailController@store');
 
+Route::get('pdf', function(){
+
+        Fpdf::AddPage();
+        Fpdf::SetFont('Arial','B',16);
+        Fpdf::Cell(40,10,'Hello World!');
+        Fpdf::Output();
+        exit;
+
+});
 
 Route::get('/index','UserDetailController@index');
-Route::get('/downloadPDF/{id}','UserDetailController@downloadPDF');
+Route::get('/downloadPDF/{id}','Order@downloadPDF');

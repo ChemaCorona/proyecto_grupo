@@ -3,20 +3,19 @@
 @section('content')
 <table class="table table-striped">
   <thead>
-    <th>ID</th>
-    <th>Name</th>
-    <th>Subname</th>
-    <th>Email</th>
-    <th>Password</th>
-    <th>user</th>
+    <th>Order ID</th>
+    <th>Your ID</th>
+    <th>Total Price</th>
+    <th>Purchased at</th>
   </thead>
   <tbody>
-    @foreach($users as $user)
+    @foreach($orders as $order)
     <tr>
-      <td>{{$user->name}}</td>
-      <td>{{$user->email}}</td>
-      <td>{{$user->password}}</td>
-      <td><a href="{{action('UserDetailController@downloadPDF', $user->id)}}">PDF</a></td>
+      <td>{{ $order->id }}</td>
+      <td>{{ $order->id_user }}</td>
+      <td>{{ $order->totalprice }}</td>
+      <td>{{ $order->date }}</td>
+      <td><a href="{{action('Order@downloadPDF', $order->id)}}">PDF</a></td>
     </tr>
     @endforeach
   </tbody>

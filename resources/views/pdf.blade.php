@@ -10,15 +10,18 @@
     <table class="table table-bordered">
       <tr>
         <td>
-          {{$user->name}}
+          {{$order->id}}
         </td>
         <td>
-          {{$user->password}}
+          {{$order->id_user}}
         </td>
       </tr>
       <tr>
         <td>
-          {{$user->email}}
+          {{$order->totalprice}}
+        </td>
+        <td>
+          {{$order->date}}
         </td>
       </tr>
     </table>
